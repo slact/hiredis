@@ -123,6 +123,17 @@ redisReader *redisReaderCreate(void);
 /* Function to free the reply objects hiredis returns by default. */
 void freeReplyObject(void *reply);
 
+typedef struct redisCmdChain_s redisCmdChain;
+struct {
+    char *data;
+    size_t len;
+    enum {
+        SDS,
+        RAW,
+    } dataType;
+    redisCmdChain *next;
+} redisCmdChain_s;
+
 /* Functions to format a command according to the protocol. */
 int redisvFormatCommand(char **target, const char *format, va_list ap);
 int redisFormatCommand(char **target, const char *format, ...);

@@ -218,6 +218,7 @@ int redisvFormatCommand(char **target, const char *format, va_list ap) {
     int totlen = 0;
     int error_type = 0; /* 0 = no error; -1 = memory error; -2 = format error */
     int j;
+    redisCmdChain *chainStart = NULL, *chainCur = NULL;
 
     /* Abort if there is not target to set */
     if (target == NULL)
